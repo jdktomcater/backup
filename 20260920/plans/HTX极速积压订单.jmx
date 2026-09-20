@@ -1,0 +1,1259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="HTX极速积压订单">
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="地址-压测环境不走网关">
+        <stringProp name="HTTPSampler.domain">txpressure-dispatch.qwasn.com</stringProp>
+        <stringProp name="HTTPSampler.protocol">http</stringProp>
+        <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.implementation"></stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="内部商户1-压测">
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding">UTF-8</stringProp>
+        <stringProp name="filename">E:/install/sites/jmeter/plans/data/M_K_内部商户1.txt</stringProp>
+        <boolProp name="ignoreFirstLine">false</boolProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="variableNames">dmerchant_id,dkey</stringProp>
+      </CSVDataSet>
+      <hashTree/>
+      <com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup guiclass="com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroupGui" testclass="com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup" testname="场景1-912极速转卡（纯充值）">
+        <elementProp name="ThreadGroup.main_controller" elementType="com.blazemeter.jmeter.control.VirtualUserController"/>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <stringProp name="TargetLevel">${__P(TargetLevel,400)}</stringProp>
+        <stringProp name="RampUp">${__P(RampUp,1000)}</stringProp>
+        <stringProp name="Steps">${__P(Steps,100)}</stringProp>
+        <stringProp name="Hold">${__P(Hold,8000)}</stringProp>
+        <stringProp name="LogFilename"></stringProp>
+        <stringProp name="Iterations"></stringProp>
+        <boolProp name="same_user_on_next_iteration">true</boolProp>
+        <stringProp name="Unit">S</stringProp>
+      </com.blazemeter.jmeter.threads.concurrency.ConcurrencyThreadGroup>
+      <hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="充值+充值确认+提款确认"/>
+        <hashTree>
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="300金额-60%">
+            <intProp name="ThroughputController.style">1</intProp>
+            <boolProp name="ThroughputController.perThread">false</boolProp>
+            <intProp name="ThroughputController.maxThroughput">1</intProp>
+            <FloatProperty>
+              <name>ThroughputController.percentThroughput</name>
+              <value>60.0</value>
+              <savedValue>0.0</savedValue>
+            </FloatProperty>
+          </ThroughputController>
+          <hashTree>
+            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters">
+              <collectionProp name="UserParameters.names">
+                <stringProp name="-1787697648">bank_code</stringProp>
+                <stringProp name="-1858772221">bank_num</stringProp>
+                <stringProp name="427278064">bank_owner</stringProp>
+                <stringProp name="-1795601167">bank_address</stringProp>
+                <stringProp name="-934624384">remark</stringProp>
+                <stringProp name="-1941370190">user_credit_level</stringProp>
+                <stringProp name="1927915024">user_level</stringProp>
+                <stringProp name="-147132901">user_ip</stringProp>
+                <stringProp name="-612351174">phone_number</stringProp>
+                <stringProp name="-1806538376">query_url</stringProp>
+                <stringProp name="-81103626">channel_type</stringProp>
+                <stringProp name="-1948726807">split_order</stringProp>
+                <stringProp name="377959296">user_address</stringProp>
+                <stringProp name="100490164">is_dc</stringProp>
+                <stringProp name="-1210880319">amount_type</stringProp>
+                <stringProp name="575402001">currency</stringProp>
+                <stringProp name="-989163880">protocol</stringProp>
+                <stringProp name="-173671634">client_type</stringProp>
+                <stringProp name="-84625186">source_type</stringProp>
+                <stringProp name="3373707">name</stringProp>
+                <stringProp name="558450346">risk_type</stringProp>
+                <stringProp name="1167805093">app_site</stringProp>
+                <stringProp name="295717893">bank_mobile</stringProp>
+                <stringProp name="-1193614750">id_num</stringProp>
+                <stringProp name="-529861103">user_credit_level_deposit</stringProp>
+                <stringProp name="1034523503">bank_code_deposit</stringProp>
+                <stringProp name="-1505781661">USDT_address</stringProp>
+                <stringProp name="-1164591239">notify_url</stringProp>
+                <stringProp name="1337530848">return_url</stringProp>
+                <stringProp name="-147132913">user_id</stringProp>
+                <stringProp name="-787102287">pay_amt</stringProp>
+              </collectionProp>
+              <collectionProp name="UserParameters.thread_values">
+                <collectionProp name="1738111068">
+                  <stringProp name="66530">CCB</stringProp>
+                  <stringProp name="-1310140749">6217132123123${__Random(1000,9999,)}</stringProp>
+                  <stringProp name="442363260">${__RandomString(1,赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳丰鲍史唐费廉岑薛雷贺倪汤滕殷罗毕郝邬安常乐于时傅皮卞齐康伍余元卜顾孟平黄和萧尹湛汪祁毛禹狄米贝成戴谈宋茅庞熊纪舒屈项祝董梁杜阮蓝闵席季麻强贾路娄危江童颜郭梅盛林刁钟徐邱骆高夏蔡樊胡凌霍虞万支柯昝管卢莫白房裘缪干解应宗丁宣贲邓郁单杭洪包诸左石崔吉钮龚程嵇邢滑裴陆荣翁荀羊惠甄曲家封芮羿储靳汲邴糜松井段富巫乌焦巴弓牧隗山谷车侯宓蓬全郗班仰秋仲伊宫宁仇栾暴甘钭祖武符刘景詹束龙叶幸司韶郜黎蓟印宿台怀蒲从鄂索咸籍赖卓蔺屠蒙池乔胥能苍双闻莘党翟谭贡劳逄姬申扶堵冉宰郦雍璩桑桂濮牛寿通边扈燕冀浦尚农温别庄晏柴瞿阎充慕连茹习宦艾鱼容向古易慎戈廖终暨居衡步都耿满弘匡国文寇广禄阙东欧殳沃利蔚越隆师巩厍聂勾敖融冷訾辛阚那简饶空曾毋沙乜养鞠须丰巢关相查蒯红游竺权益桓公万俟司马上官夏侯诸葛闻人东方赫连皇甫尉迟公羊澹台公冶宗政濮阳淳于单于太叔申屠公孙轩辕令狐宇文长孙慕容司徒司空穆姚邵明臧计伏丘经於厉戎薄阴逢郏逯盖欧阳乐正钟离闾丘鲜于亓官司寇仉督子车颛孙端木巫马公西漆雕仲孙壤驷公良拓跋夹谷宰父谷粱晋楚阎法汝鄢涂钦段干百里东郭南门呼延归海羊舌微生岳帅缑亢况后有琴梁丘左丘东门西门商牟佘佴伯赏南宫墨哈谯笪年爱阳佟第五言福庚,)}${__RandomString(2,豫章故郡洪都新府星分翼轸地接衡庐襟三江而带五湖控蛮荆而引瓯越物华天宝龙光射牛斗之墟人杰地灵徐孺下陈蕃之榻雄州雾列俊采星驰台隍枕夷夏之交宾主尽东南之美都督阎公之雅望棨戟遥临宇文新州之懿范襜帷暂驻十旬休假胜友如云千里逢迎高朋满座腾蛟起凤孟学士之词宗紫电青霜王将军之武库家君作宰路出名区童子何知躬逢胜饯时维九月序属三秋潦水尽而寒潭清烟光凝而暮山紫俨骖騑于上路访风景于崇阿临帝子之长洲得天人之旧馆层峦耸翠上出重霄飞阁流丹下临无地鹤汀凫渚穷岛屿之萦回桂殿兰宫落霞与孤鹜齐飞秋水共长天一色披绣闼俯雕甍山原旷其盈视川泽纡其骇瞩闾阎扑地钟鸣鼎食之家舸舰弥津青雀黄龙之舳云销雨霁彩彻区明落霞与孤鹜齐飞秋水共长天一色渔舟唱晚响穷彭蠡之滨雁阵惊寒声断衡阳之浦遥襟甫畅逸兴遄飞爽籁发而清风生纤歌凝而白云遏睢园绿竹气凌彭泽之樽邺水朱华光照临川之笔四美具二难并穷睇眄于中天极娱游于暇日天高地迥觉宇宙之无穷兴尽悲来识盈虚之有数望长安于日下目吴会于云间地势极而南溟深天柱高而北辰远关山难越谁悲失路之人萍水相逢尽是他乡之客怀帝阍而不见奉宣室以何年嗟乎时运不齐命途多舛冯唐易老李广难封屈贾谊于长沙非无圣主窜梁鸿于海曲岂乏明时所赖君子见机达人知命老当益壮宁移白首之心穷且益坚不坠青云之志酌贪泉而觉爽处涸辙以犹欢北海虽赊扶摇可接东隅已逝桑榆非晚孟尝高洁空余报国之情阮籍猖狂岂效穷途之哭勃三尺微命一介书生无路请缨等终军之弱冠有怀投笔慕宗悫之长风舍簪笏于百龄奉晨昏于万里非谢家之宝树接孟氏之芳邻他日趋庭叨陪鲤对今兹捧袂喜托龙门杨意不逢抚凌云而自惜钟期既遇奏流水以何惭呜乎胜地不常盛筵难再兰亭已矣梓泽丘墟临别赠言幸承恩于伟饯登高作赋是所望于群公敢竭鄙怀恭疏短引一言均赋四韵俱成请洒潘江各倾陆海云尔,)}</stringProp>
+                  <stringProp name="753984894">${__RandomString(6,豫章故郡洪都新府星分翼轸地接衡庐襟三江而带五湖控蛮荆而引瓯越物华天宝龙光射牛斗之墟人杰地灵徐孺下陈蕃之榻雄州雾列俊采星驰台隍枕夷夏之交宾主尽东南之美都督阎公之雅望棨戟遥临宇文新州之懿范襜帷暂驻十旬休假胜友如云千里逢迎高朋满座腾蛟起凤孟学士之词宗紫电青霜王将军之武库家君作宰路出名区童子何知躬逢胜饯时维九月序属三秋潦水尽而寒潭清烟光凝而暮山紫俨骖騑于上路访风景于崇阿临帝子之长洲得天人之旧馆层峦耸翠上出重霄飞阁流丹下临无地鹤汀凫渚穷岛屿之萦回桂殿兰宫落霞与孤鹜齐飞秋水共长天一色披绣闼俯雕甍山原旷其盈视川泽纡其骇瞩闾阎扑地钟鸣鼎食之家舸舰弥津青雀黄龙之舳云销雨霁彩彻区明落霞与孤鹜齐飞秋水共长天一色渔舟唱晚响穷彭蠡之滨雁阵惊寒声断衡阳之浦遥襟甫畅逸兴遄飞爽籁发而清风生纤歌凝而白云遏睢园绿竹气凌彭泽之樽邺水朱华光照临川之笔四美具二难并穷睇眄于中天极娱游于暇日天高地迥觉宇宙之无穷兴尽悲来识盈虚之有数望长安于日下目吴会于云间地势极而南溟深天柱高而北辰远关山难越谁悲失路之人萍水相逢尽是他乡之客怀帝阍而不见奉宣室以何年嗟乎时运不齐命途多舛冯唐易老李广难封屈贾谊于长沙非无圣主窜梁鸿于海曲岂乏明时所赖君子见机达人知命老当益壮宁移白首之心穷且益坚不坠青云之志酌贪泉而觉爽处涸辙以犹欢北海虽赊扶摇可接东隅已逝桑榆非晚孟尝高洁空余报国之情阮籍猖狂岂效穷途之哭勃三尺微命一介书生无路请缨等终军之弱冠有怀投笔慕宗悫之长风舍簪笏于百龄奉晨昏于万里非谢家之宝树接孟氏之芳邻他日趋庭叨陪鲤对今兹捧袂喜托龙门杨意不逢抚凌云而自惜钟期既遇奏流水以何惭呜乎胜地不常盛筵难再兰亭已矣梓泽丘墟临别赠言幸承恩于伟饯登高作赋是所望于群公敢竭鄙怀恭疏短引一言均赋四韵俱成请洒潘江各倾陆海云尔,)}</stringProp>
+                  <stringProp name="1607536909">AUTOMX${__RandomString(4,zxcvbnmasdfghjklqwertyuiop0123456789,)}</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="-1258129322">175.100.203.34</stringProp>
+                  <stringProp name="0"></stringProp>
+                  <stringProp name="-1632055913">http://site5026.web-classyblue-3.bwfat2022.com</stringProp>
+                  <stringProp name="49">1</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="753984894">${__RandomString(6,豫章故郡洪都新府星分翼轸地接衡庐襟三江而带五湖控蛮荆而引瓯越物华天宝龙光射牛斗之墟人杰地灵徐孺下陈蕃之榻雄州雾列俊采星驰台隍枕夷夏之交宾主尽东南之美都督阎公之雅望棨戟遥临宇文新州之懿范襜帷暂驻十旬休假胜友如云千里逢迎高朋满座腾蛟起凤孟学士之词宗紫电青霜王将军之武库家君作宰路出名区童子何知躬逢胜饯时维九月序属三秋潦水尽而寒潭清烟光凝而暮山紫俨骖騑于上路访风景于崇阿临帝子之长洲得天人之旧馆层峦耸翠上出重霄飞阁流丹下临无地鹤汀凫渚穷岛屿之萦回桂殿兰宫落霞与孤鹜齐飞秋水共长天一色披绣闼俯雕甍山原旷其盈视川泽纡其骇瞩闾阎扑地钟鸣鼎食之家舸舰弥津青雀黄龙之舳云销雨霁彩彻区明落霞与孤鹜齐飞秋水共长天一色渔舟唱晚响穷彭蠡之滨雁阵惊寒声断衡阳之浦遥襟甫畅逸兴遄飞爽籁发而清风生纤歌凝而白云遏睢园绿竹气凌彭泽之樽邺水朱华光照临川之笔四美具二难并穷睇眄于中天极娱游于暇日天高地迥觉宇宙之无穷兴尽悲来识盈虚之有数望长安于日下目吴会于云间地势极而南溟深天柱高而北辰远关山难越谁悲失路之人萍水相逢尽是他乡之客怀帝阍而不见奉宣室以何年嗟乎时运不齐命途多舛冯唐易老李广难封屈贾谊于长沙非无圣主窜梁鸿于海曲岂乏明时所赖君子见机达人知命老当益壮宁移白首之心穷且益坚不坠青云之志酌贪泉而觉爽处涸辙以犹欢北海虽赊扶摇可接东隅已逝桑榆非晚孟尝高洁空余报国之情阮籍猖狂岂效穷途之哭勃三尺微命一介书生无路请缨等终军之弱冠有怀投笔慕宗悫之长风舍簪笏于百龄奉晨昏于万里非谢家之宝树接孟氏之芳邻他日趋庭叨陪鲤对今兹捧袂喜托龙门杨意不逢抚凌云而自惜钟期既遇奏流水以何惭呜乎胜地不常盛筵难再兰亭已矣梓泽丘墟临别赠言幸承恩于伟饯登高作赋是所望于群公敢竭鄙怀恭疏短引一言均赋四韵俱成请洒潘江各倾陆海云尔,)}</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="66894">CNY</stringProp>
+                  <stringProp name="66530">CCB</stringProp>
+                  <stringProp name="0"></stringProp>
+                  <stringProp name="49">1</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="442363260">${__RandomString(1,赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳丰鲍史唐费廉岑薛雷贺倪汤滕殷罗毕郝邬安常乐于时傅皮卞齐康伍余元卜顾孟平黄和萧尹湛汪祁毛禹狄米贝成戴谈宋茅庞熊纪舒屈项祝董梁杜阮蓝闵席季麻强贾路娄危江童颜郭梅盛林刁钟徐邱骆高夏蔡樊胡凌霍虞万支柯昝管卢莫白房裘缪干解应宗丁宣贲邓郁单杭洪包诸左石崔吉钮龚程嵇邢滑裴陆荣翁荀羊惠甄曲家封芮羿储靳汲邴糜松井段富巫乌焦巴弓牧隗山谷车侯宓蓬全郗班仰秋仲伊宫宁仇栾暴甘钭祖武符刘景詹束龙叶幸司韶郜黎蓟印宿台怀蒲从鄂索咸籍赖卓蔺屠蒙池乔胥能苍双闻莘党翟谭贡劳逄姬申扶堵冉宰郦雍璩桑桂濮牛寿通边扈燕冀浦尚农温别庄晏柴瞿阎充慕连茹习宦艾鱼容向古易慎戈廖终暨居衡步都耿满弘匡国文寇广禄阙东欧殳沃利蔚越隆师巩厍聂勾敖融冷訾辛阚那简饶空曾毋沙乜养鞠须丰巢关相查蒯红游竺权益桓公万俟司马上官夏侯诸葛闻人东方赫连皇甫尉迟公羊澹台公冶宗政濮阳淳于单于太叔申屠公孙轩辕令狐宇文长孙慕容司徒司空穆姚邵明臧计伏丘经於厉戎薄阴逢郏逯盖欧阳乐正钟离闾丘鲜于亓官司寇仉督子车颛孙端木巫马公西漆雕仲孙壤驷公良拓跋夹谷宰父谷粱晋楚阎法汝鄢涂钦段干百里东郭南门呼延归海羊舌微生岳帅缑亢况后有琴梁丘左丘东门西门商牟佘佴伯赏南宫墨哈谯笪年爱阳佟第五言福庚,)}${__RandomString(2,豫章故郡洪都新府星分翼轸地接衡庐襟三江而带五湖控蛮荆而引瓯越物华天宝龙光射牛斗之墟人杰地灵徐孺下陈蕃之榻雄州雾列俊采星驰台隍枕夷夏之交宾主尽东南之美都督阎公之雅望棨戟遥临宇文新州之懿范襜帷暂驻十旬休假胜友如云千里逢迎高朋满座腾蛟起凤孟学士之词宗紫电青霜王将军之武库家君作宰路出名区童子何知躬逢胜饯时维九月序属三秋潦水尽而寒潭清烟光凝而暮山紫俨骖騑于上路访风景于崇阿临帝子之长洲得天人之旧馆层峦耸翠上出重霄飞阁流丹下临无地鹤汀凫渚穷岛屿之萦回桂殿兰宫落霞与孤鹜齐飞秋水共长天一色披绣闼俯雕甍山原旷其盈视川泽纡其骇瞩闾阎扑地钟鸣鼎食之家舸舰弥津青雀黄龙之舳云销雨霁彩彻区明落霞与孤鹜齐飞秋水共长天一色渔舟唱晚响穷彭蠡之滨雁阵惊寒声断衡阳之浦遥襟甫畅逸兴遄飞爽籁发而清风生纤歌凝而白云遏睢园绿竹气凌彭泽之樽邺水朱华光照临川之笔四美具二难并穷睇眄于中天极娱游于暇日天高地迥觉宇宙之无穷兴尽悲来识盈虚之有数望长安于日下目吴会于云间地势极而南溟深天柱高而北辰远关山难越谁悲失路之人萍水相逢尽是他乡之客怀帝阍而不见奉宣室以何年嗟乎时运不齐命途多舛冯唐易老李广难封屈贾谊于长沙非无圣主窜梁鸿于海曲岂乏明时所赖君子见机达人知命老当益壮宁移白首之心穷且益坚不坠青云之志酌贪泉而觉爽处涸辙以犹欢北海虽赊扶摇可接东隅已逝桑榆非晚孟尝高洁空余报国之情阮籍猖狂岂效穷途之哭勃三尺微命一介书生无路请缨等终军之弱冠有怀投笔慕宗悫之长风舍簪笏于百龄奉晨昏于万里非谢家之宝树接孟氏之芳邻他日趋庭叨陪鲤对今兹捧袂喜托龙门杨意不逢抚凌云而自惜钟期既遇奏流水以何惭呜乎胜地不常盛筵难再兰亭已矣梓泽丘墟临别赠言幸承恩于伟饯登高作赋是所望于群公敢竭鄙怀恭疏短引一言均赋四韵俱成请洒潘江各倾陆海云尔,)}</stringProp>
+                  <stringProp name="0"></stringProp>
+                  <stringProp name="51">3</stringProp>
+                  <stringProp name="-37662831">155${__Random(00000000,99999999,)}</stringProp>
+                  <stringProp name="628581442">6217132123123${__Random(10000,99999,)}</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="66530">CCB</stringProp>
+                  <stringProp name="2033077207">TGRXZPXE8q6PNbRnRK5A3ZPZPVTm8GR8dR</stringProp>
+                  <stringProp name="-1919391602">http://txpressure-dispatch.qwasn.com/order/callback</stringProp>
+                  <stringProp name="-1919391602">http://txpressure-dispatch.qwasn.com/order/callback</stringProp>
+                  <stringProp name="-1815175906">AUTOMX${__Random(1000000,9999999)}</stringProp>
+                  <stringProp name="1505891419">300.00</stringProp>
+                </collectionProp>
+              </collectionProp>
+              <boolProp name="UserParameters.per_iteration">false</boolProp>
+            </UserParameters>
+            <hashTree/>
+            <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="用户定义的变量">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="pay_type" elementType="Argument">
+                  <stringProp name="Argument.name">pay_type</stringProp>
+                  <stringProp name="Argument.value">912</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <stringProp name="Argument.desc">提款方式（数据类型：int）,{1：银行卡转账，888：备付金转账 ，912：极速转卡} </stringProp>
+                </elementProp>
+                <elementProp name="merchant_id1" elementType="Argument">
+                  <stringProp name="Argument.name">merchant_id1</stringProp>
+                  <stringProp name="Argument.value">3000101</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="key1" elementType="Argument">
+                  <stringProp name="Argument.name">key1</stringProp>
+                  <stringProp name="Argument.value">8v8rlnb564jroob00k6a4fs4lw0uljg5</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="request_type" elementType="Argument">
+                  <stringProp name="Argument.name">request_type</stringProp>
+                  <stringProp name="Argument.value">1</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </Arguments>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTX_merchantaccountrecord_deposit_create">
+              <stringProp name="HTTPSampler.path">/deposit/create</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="merchant_id" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${dmerchant_id}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">merchant_id</stringProp>
+                  </elementProp>
+                  <elementProp name="merchant_order_id" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${merchant_order_id}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">merchant_order_id</stringProp>
+                  </elementProp>
+                  <elementProp name="pay_type" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${pay_type}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">pay_type</stringProp>
+                  </elementProp>
+                  <elementProp name="pay_amt" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${pay_amt}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">pay_amt</stringProp>
+                  </elementProp>
+                  <elementProp name="name" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${name}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">name</stringProp>
+                  </elementProp>
+                  <elementProp name="user_credit_level" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${user_credit_level}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">user_credit_level</stringProp>
+                  </elementProp>
+                  <elementProp name="user_level" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${user_level}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">user_level</stringProp>
+                  </elementProp>
+                  <elementProp name="client_type" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${client_type}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">client_type</stringProp>
+                  </elementProp>
+                  <elementProp name="notify_url" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${notify_url}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">notify_url</stringProp>
+                  </elementProp>
+                  <elementProp name="return_url" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${return_url}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">return_url</stringProp>
+                  </elementProp>
+                  <elementProp name="bank_code" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${bank_code}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">bank_code</stringProp>
+                  </elementProp>
+                  <elementProp name="user_id" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${user_id}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">user_id</stringProp>
+                  </elementProp>
+                  <elementProp name="user_ip" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${user_ip}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">user_ip</stringProp>
+                  </elementProp>
+                  <elementProp name="remark" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${Remark}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">remark</stringProp>
+                  </elementProp>
+                  <elementProp name="phone_number" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${phone_number}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">phone_number</stringProp>
+                  </elementProp>
+                  <elementProp name="source_type" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">0</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">source_type</stringProp>
+                  </elementProp>
+                  <elementProp name="member_account" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">member_account</stringProp>
+                  </elementProp>
+                  <elementProp name="protocol" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">0</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">protocol</stringProp>
+                  </elementProp>
+                  <elementProp name="currency" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">currency</stringProp>
+                  </elementProp>
+                  <elementProp name="sign" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${sign}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">sign</stringProp>
+                  </elementProp>
+                  <elementProp name="amount_type" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">amount_type</stringProp>
+                  </elementProp>
+                  <elementProp name="rate" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">rate</stringProp>
+                  </elementProp>
+                  <elementProp name="act_pay_amt" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">act_pay_amt</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="formheader">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">false</stringProp>
+                <stringProp name="script">import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.concurrent.ThreadLocalRandom
+import org.apache.commons.codec.digest.DigestUtils
+
+// 时间：yyMMddHHmmss
+def time = new SimpleDateFormat(&quot;yyMMddHHmmss&quot;).format(new Date())
+
+// 随机数
+def rand1 = ThreadLocalRandom.current().nextInt(0, 100000) // 0~99999
+def rand2 = ThreadLocalRandom.current().nextInt(0, 1000)   // 0~999
+
+def Remark=&quot;${remark}&quot;
+vars.put(&quot;Remark&quot;,Remark)
+
+// 订单号
+def merchant_order_id = &quot;TDEST${time}${rand1}${rand2}&quot;
+
+vars.put(&quot;merchant_order_id&quot;, merchant_order_id)
+
+def str=&quot;merchant_id=${dmerchant_id}&amp;merchant_order_id=&quot;+merchant_order_id+&quot;&amp;pay_type=${pay_type}&amp;pay_amt=${pay_amt}&amp;notify_url=${notify_url}&amp;return_url=${return_url}&amp;bank_code=${bank_code}&amp;remark=&quot;+Remark+&quot;&amp;key=${dkey}&quot;
+def depositorder_sign=DigestUtils.md5Hex(str)
+
+vars.put(&quot;sign&quot;,depositorder_sign)
+
+
+
+
+</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="merchant_order_id1" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">merchant_order_id1</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.merchant_order_id</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">LLLLLLLLLLLL</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="pay_amt1" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">pay_amt1</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.pay_amt</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">LLLLLLLLLLLL</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="match_merchant_order_id1" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">match_merchant_order_id1</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.match_merchant_order_id</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">LLLLL</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="调试后置处理程序" enabled="true">
+                <boolProp name="displayJMeterProperties">false</boolProp>
+                <boolProp name="displayJMeterVariables">true</boolProp>
+                <boolProp name="displaySamplerProperties">true</boolProp>
+                <boolProp name="displaySystemProperties">false</boolProp>
+              </DebugPostProcessor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="响应断言" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1629487605">&quot;pay_message&quot;:1</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message"></stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">16</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="200金额-20%">
+            <intProp name="ThroughputController.style">1</intProp>
+            <boolProp name="ThroughputController.perThread">false</boolProp>
+            <intProp name="ThroughputController.maxThroughput">1</intProp>
+            <FloatProperty>
+              <name>ThroughputController.percentThroughput</name>
+              <value>20.0</value>
+              <savedValue>0.0</savedValue>
+            </FloatProperty>
+          </ThroughputController>
+          <hashTree>
+            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
+              <collectionProp name="UserParameters.names">
+                <stringProp name="-1787697648">bank_code</stringProp>
+                <stringProp name="-1858772221">bank_num</stringProp>
+                <stringProp name="427278064">bank_owner</stringProp>
+                <stringProp name="-1795601167">bank_address</stringProp>
+                <stringProp name="-934624384">remark</stringProp>
+                <stringProp name="-1941370190">user_credit_level</stringProp>
+                <stringProp name="1927915024">user_level</stringProp>
+                <stringProp name="-147132901">user_ip</stringProp>
+                <stringProp name="-612351174">phone_number</stringProp>
+                <stringProp name="-1806538376">query_url</stringProp>
+                <stringProp name="-81103626">channel_type</stringProp>
+                <stringProp name="-1948726807">split_order</stringProp>
+                <stringProp name="377959296">user_address</stringProp>
+                <stringProp name="100490164">is_dc</stringProp>
+                <stringProp name="-1210880319">amount_type</stringProp>
+                <stringProp name="575402001">currency</stringProp>
+                <stringProp name="-989163880">protocol</stringProp>
+                <stringProp name="-173671634">client_type</stringProp>
+                <stringProp name="-84625186">source_type</stringProp>
+                <stringProp name="3373707">name</stringProp>
+                <stringProp name="558450346">risk_type</stringProp>
+                <stringProp name="1167805093">app_site</stringProp>
+                <stringProp name="295717893">bank_mobile</stringProp>
+                <stringProp name="-1193614750">id_num</stringProp>
+                <stringProp name="-529861103">user_credit_level_deposit</stringProp>
+                <stringProp name="1034523503">bank_code_deposit</stringProp>
+                <stringProp name="-1505781661">USDT_address</stringProp>
+                <stringProp name="-1164591239">notify_url</stringProp>
+                <stringProp name="1337530848">return_url</stringProp>
+                <stringProp name="-147132913">user_id</stringProp>
+                <stringProp name="-787102287">pay_amt</stringProp>
+              </collectionProp>
+              <collectionProp name="UserParameters.thread_values">
+                <collectionProp name="-629284255">
+                  <stringProp name="66530">CCB</stringProp>
+                  <stringProp name="-1310140749">6217132123123${__Random(1000,9999,)}</stringProp>
+                  <stringProp name="442363260">${__RandomString(1,赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳丰鲍史唐费廉岑薛雷贺倪汤滕殷罗毕郝邬安常乐于时傅皮卞齐康伍余元卜顾孟平黄和萧尹湛汪祁毛禹狄米贝成戴谈宋茅庞熊纪舒屈项祝董梁杜阮蓝闵席季麻强贾路娄危江童颜郭梅盛林刁钟徐邱骆高夏蔡樊胡凌霍虞万支柯昝管卢莫白房裘缪干解应宗丁宣贲邓郁单杭洪包诸左石崔吉钮龚程嵇邢滑裴陆荣翁荀羊惠甄曲家封芮羿储靳汲邴糜松井段富巫乌焦巴弓牧隗山谷车侯宓蓬全郗班仰秋仲伊宫宁仇栾暴甘钭祖武符刘景詹束龙叶幸司韶郜黎蓟印宿台怀蒲从鄂索咸籍赖卓蔺屠蒙池乔胥能苍双闻莘党翟谭贡劳逄姬申扶堵冉宰郦雍璩桑桂濮牛寿通边扈燕冀浦尚农温别庄晏柴瞿阎充慕连茹习宦艾鱼容向古易慎戈廖终暨居衡步都耿满弘匡国文寇广禄阙东欧殳沃利蔚越隆师巩厍聂勾敖融冷訾辛阚那简饶空曾毋沙乜养鞠须丰巢关相查蒯红游竺权益桓公万俟司马上官夏侯诸葛闻人东方赫连皇甫尉迟公羊澹台公冶宗政濮阳淳于单于太叔申屠公孙轩辕令狐宇文长孙慕容司徒司空穆姚邵明臧计伏丘经於厉戎薄阴逢郏逯盖欧阳乐正钟离闾丘鲜于亓官司寇仉督子车颛孙端木巫马公西漆雕仲孙壤驷公良拓跋夹谷宰父谷粱晋楚阎法汝鄢涂钦段干百里东郭南门呼延归海羊舌微生岳帅缑亢况后有琴梁丘左丘东门西门商牟佘佴伯赏南宫墨哈谯笪年爱阳佟第五言福庚,)}${__RandomString(2,豫章故郡洪都新府星分翼轸地接衡庐襟三江而带五湖控蛮荆而引瓯越物华天宝龙光射牛斗之墟人杰地灵徐孺下陈蕃之榻雄州雾列俊采星驰台隍枕夷夏之交宾主尽东南之美都督阎公之雅望棨戟遥临宇文新州之懿范襜帷暂驻十旬休假胜友如云千里逢迎高朋满座腾蛟起凤孟学士之词宗紫电青霜王将军之武库家君作宰路出名区童子何知躬逢胜饯时维九月序属三秋潦水尽而寒潭清烟光凝而暮山紫俨骖騑于上路访风景于崇阿临帝子之长洲得天人之旧馆层峦耸翠上出重霄飞阁流丹下临无地鹤汀凫渚穷岛屿之萦回桂殿兰宫落霞与孤鹜齐飞秋水共长天一色披绣闼俯雕甍山原旷其盈视川泽纡其骇瞩闾阎扑地钟鸣鼎食之家舸舰弥津青雀黄龙之舳云销雨霁彩彻区明落霞与孤鹜齐飞秋水共长天一色渔舟唱晚响穷彭蠡之滨雁阵惊寒声断衡阳之浦遥襟甫畅逸兴遄飞爽籁发而清风生纤歌凝而白云遏睢园绿竹气凌彭泽之樽邺水朱华光照临川之笔四美具二难并穷睇眄于中天极娱游于暇日天高地迥觉宇宙之无穷兴尽悲来识盈虚之有数望长安于日下目吴会于云间地势极而南溟深天柱高而北辰远关山难越谁悲失路之人萍水相逢尽是他乡之客怀帝阍而不见奉宣室以何年嗟乎时运不齐命途多舛冯唐易老李广难封屈贾谊于长沙非无圣主窜梁鸿于海曲岂乏明时所赖君子见机达人知命老当益壮宁移白首之心穷且益坚不坠青云之志酌贪泉而觉爽处涸辙以犹欢北海虽赊扶摇可接东隅已逝桑榆非晚孟尝高洁空余报国之情阮籍猖狂岂效穷途之哭勃三尺微命一介书生无路请缨等终军之弱冠有怀投笔慕宗悫之长风舍簪笏于百龄奉晨昏于万里非谢家之宝树接孟氏之芳邻他日趋庭叨陪鲤对今兹捧袂喜托龙门杨意不逢抚凌云而自惜钟期既遇奏流水以何惭呜乎胜地不常盛筵难再兰亭已矣梓泽丘墟临别赠言幸承恩于伟饯登高作赋是所望于群公敢竭鄙怀恭疏短引一言均赋四韵俱成请洒潘江各倾陆海云尔,)}</stringProp>
+                  <stringProp name="753984894">${__RandomString(6,豫章故郡洪都新府星分翼轸地接衡庐襟三江而带五湖控蛮荆而引瓯越物华天宝龙光射牛斗之墟人杰地灵徐孺下陈蕃之榻雄州雾列俊采星驰台隍枕夷夏之交宾主尽东南之美都督阎公之雅望棨戟遥临宇文新州之懿范襜帷暂驻十旬休假胜友如云千里逢迎高朋满座腾蛟起凤孟学士之词宗紫电青霜王将军之武库家君作宰路出名区童子何知躬逢胜饯时维九月序属三秋潦水尽而寒潭清烟光凝而暮山紫俨骖騑于上路访风景于崇阿临帝子之长洲得天人之旧馆层峦耸翠上出重霄飞阁流丹下临无地鹤汀凫渚穷岛屿之萦回桂殿兰宫落霞与孤鹜齐飞秋水共长天一色披绣闼俯雕甍山原旷其盈视川泽纡其骇瞩闾阎扑地钟鸣鼎食之家舸舰弥津青雀黄龙之舳云销雨霁彩彻区明落霞与孤鹜齐飞秋水共长天一色渔舟唱晚响穷彭蠡之滨雁阵惊寒声断衡阳之浦遥襟甫畅逸兴遄飞爽籁发而清风生纤歌凝而白云遏睢园绿竹气凌彭泽之樽邺水朱华光照临川之笔四美具二难并穷睇眄于中天极娱游于暇日天高地迥觉宇宙之无穷兴尽悲来识盈虚之有数望长安于日下目吴会于云间地势极而南溟深天柱高而北辰远关山难越谁悲失路之人萍水相逢尽是他乡之客怀帝阍而不见奉宣室以何年嗟乎时运不齐命途多舛冯唐易老李广难封屈贾谊于长沙非无圣主窜梁鸿于海曲岂乏明时所赖君子见机达人知命老当益壮宁移白首之心穷且益坚不坠青云之志酌贪泉而觉爽处涸辙以犹欢北海虽赊扶摇可接东隅已逝桑榆非晚孟尝高洁空余报国之情阮籍猖狂岂效穷途之哭勃三尺微命一介书生无路请缨等终军之弱冠有怀投笔慕宗悫之长风舍簪笏于百龄奉晨昏于万里非谢家之宝树接孟氏之芳邻他日趋庭叨陪鲤对今兹捧袂喜托龙门杨意不逢抚凌云而自惜钟期既遇奏流水以何惭呜乎胜地不常盛筵难再兰亭已矣梓泽丘墟临别赠言幸承恩于伟饯登高作赋是所望于群公敢竭鄙怀恭疏短引一言均赋四韵俱成请洒潘江各倾陆海云尔,)}</stringProp>
+                  <stringProp name="1607536909">AUTOMX${__RandomString(4,zxcvbnmasdfghjklqwertyuiop0123456789,)}</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="-1258129322">175.100.203.34</stringProp>
+                  <stringProp name="0"></stringProp>
+                  <stringProp name="-1632055913">http://site5026.web-classyblue-3.bwfat2022.com</stringProp>
+                  <stringProp name="49">1</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="753984894">${__RandomString(6,豫章故郡洪都新府星分翼轸地接衡庐襟三江而带五湖控蛮荆而引瓯越物华天宝龙光射牛斗之墟人杰地灵徐孺下陈蕃之榻雄州雾列俊采星驰台隍枕夷夏之交宾主尽东南之美都督阎公之雅望棨戟遥临宇文新州之懿范襜帷暂驻十旬休假胜友如云千里逢迎高朋满座腾蛟起凤孟学士之词宗紫电青霜王将军之武库家君作宰路出名区童子何知躬逢胜饯时维九月序属三秋潦水尽而寒潭清烟光凝而暮山紫俨骖騑于上路访风景于崇阿临帝子之长洲得天人之旧馆层峦耸翠上出重霄飞阁流丹下临无地鹤汀凫渚穷岛屿之萦回桂殿兰宫落霞与孤鹜齐飞秋水共长天一色披绣闼俯雕甍山原旷其盈视川泽纡其骇瞩闾阎扑地钟鸣鼎食之家舸舰弥津青雀黄龙之舳云销雨霁彩彻区明落霞与孤鹜齐飞秋水共长天一色渔舟唱晚响穷彭蠡之滨雁阵惊寒声断衡阳之浦遥襟甫畅逸兴遄飞爽籁发而清风生纤歌凝而白云遏睢园绿竹气凌彭泽之樽邺水朱华光照临川之笔四美具二难并穷睇眄于中天极娱游于暇日天高地迥觉宇宙之无穷兴尽悲来识盈虚之有数望长安于日下目吴会于云间地势极而南溟深天柱高而北辰远关山难越谁悲失路之人萍水相逢尽是他乡之客怀帝阍而不见奉宣室以何年嗟乎时运不齐命途多舛冯唐易老李广难封屈贾谊于长沙非无圣主窜梁鸿于海曲岂乏明时所赖君子见机达人知命老当益壮宁移白首之心穷且益坚不坠青云之志酌贪泉而觉爽处涸辙以犹欢北海虽赊扶摇可接东隅已逝桑榆非晚孟尝高洁空余报国之情阮籍猖狂岂效穷途之哭勃三尺微命一介书生无路请缨等终军之弱冠有怀投笔慕宗悫之长风舍簪笏于百龄奉晨昏于万里非谢家之宝树接孟氏之芳邻他日趋庭叨陪鲤对今兹捧袂喜托龙门杨意不逢抚凌云而自惜钟期既遇奏流水以何惭呜乎胜地不常盛筵难再兰亭已矣梓泽丘墟临别赠言幸承恩于伟饯登高作赋是所望于群公敢竭鄙怀恭疏短引一言均赋四韵俱成请洒潘江各倾陆海云尔,)}</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="66894">CNY</stringProp>
+                  <stringProp name="66530">CCB</stringProp>
+                  <stringProp name="0"></stringProp>
+                  <stringProp name="49">1</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="442363260">${__RandomString(1,赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳丰鲍史唐费廉岑薛雷贺倪汤滕殷罗毕郝邬安常乐于时傅皮卞齐康伍余元卜顾孟平黄和萧尹湛汪祁毛禹狄米贝成戴谈宋茅庞熊纪舒屈项祝董梁杜阮蓝闵席季麻强贾路娄危江童颜郭梅盛林刁钟徐邱骆高夏蔡樊胡凌霍虞万支柯昝管卢莫白房裘缪干解应宗丁宣贲邓郁单杭洪包诸左石崔吉钮龚程嵇邢滑裴陆荣翁荀羊惠甄曲家封芮羿储靳汲邴糜松井段富巫乌焦巴弓牧隗山谷车侯宓蓬全郗班仰秋仲伊宫宁仇栾暴甘钭祖武符刘景詹束龙叶幸司韶郜黎蓟印宿台怀蒲从鄂索咸籍赖卓蔺屠蒙池乔胥能苍双闻莘党翟谭贡劳逄姬申扶堵冉宰郦雍璩桑桂濮牛寿通边扈燕冀浦尚农温别庄晏柴瞿阎充慕连茹习宦艾鱼容向古易慎戈廖终暨居衡步都耿满弘匡国文寇广禄阙东欧殳沃利蔚越隆师巩厍聂勾敖融冷訾辛阚那简饶空曾毋沙乜养鞠须丰巢关相查蒯红游竺权益桓公万俟司马上官夏侯诸葛闻人东方赫连皇甫尉迟公羊澹台公冶宗政濮阳淳于单于太叔申屠公孙轩辕令狐宇文长孙慕容司徒司空穆姚邵明臧计伏丘经於厉戎薄阴逢郏逯盖欧阳乐正钟离闾丘鲜于亓官司寇仉督子车颛孙端木巫马公西漆雕仲孙壤驷公良拓跋夹谷宰父谷粱晋楚阎法汝鄢涂钦段干百里东郭南门呼延归海羊舌微生岳帅缑亢况后有琴梁丘左丘东门西门商牟佘佴伯赏南宫墨哈谯笪年爱阳佟第五言福庚,)}${__RandomString(2,豫章故郡洪都新府星分翼轸地接衡庐襟三江而带五湖控蛮荆而引瓯越物华天宝龙光射牛斗之墟人杰地灵徐孺下陈蕃之榻雄州雾列俊采星驰台隍枕夷夏之交宾主尽东南之美都督阎公之雅望棨戟遥临宇文新州之懿范襜帷暂驻十旬休假胜友如云千里逢迎高朋满座腾蛟起凤孟学士之词宗紫电青霜王将军之武库家君作宰路出名区童子何知躬逢胜饯时维九月序属三秋潦水尽而寒潭清烟光凝而暮山紫俨骖騑于上路访风景于崇阿临帝子之长洲得天人之旧馆层峦耸翠上出重霄飞阁流丹下临无地鹤汀凫渚穷岛屿之萦回桂殿兰宫落霞与孤鹜齐飞秋水共长天一色披绣闼俯雕甍山原旷其盈视川泽纡其骇瞩闾阎扑地钟鸣鼎食之家舸舰弥津青雀黄龙之舳云销雨霁彩彻区明落霞与孤鹜齐飞秋水共长天一色渔舟唱晚响穷彭蠡之滨雁阵惊寒声断衡阳之浦遥襟甫畅逸兴遄飞爽籁发而清风生纤歌凝而白云遏睢园绿竹气凌彭泽之樽邺水朱华光照临川之笔四美具二难并穷睇眄于中天极娱游于暇日天高地迥觉宇宙之无穷兴尽悲来识盈虚之有数望长安于日下目吴会于云间地势极而南溟深天柱高而北辰远关山难越谁悲失路之人萍水相逢尽是他乡之客怀帝阍而不见奉宣室以何年嗟乎时运不齐命途多舛冯唐易老李广难封屈贾谊于长沙非无圣主窜梁鸿于海曲岂乏明时所赖君子见机达人知命老当益壮宁移白首之心穷且益坚不坠青云之志酌贪泉而觉爽处涸辙以犹欢北海虽赊扶摇可接东隅已逝桑榆非晚孟尝高洁空余报国之情阮籍猖狂岂效穷途之哭勃三尺微命一介书生无路请缨等终军之弱冠有怀投笔慕宗悫之长风舍簪笏于百龄奉晨昏于万里非谢家之宝树接孟氏之芳邻他日趋庭叨陪鲤对今兹捧袂喜托龙门杨意不逢抚凌云而自惜钟期既遇奏流水以何惭呜乎胜地不常盛筵难再兰亭已矣梓泽丘墟临别赠言幸承恩于伟饯登高作赋是所望于群公敢竭鄙怀恭疏短引一言均赋四韵俱成请洒潘江各倾陆海云尔,)}</stringProp>
+                  <stringProp name="0"></stringProp>
+                  <stringProp name="51">3</stringProp>
+                  <stringProp name="-37662831">155${__Random(00000000,99999999,)}</stringProp>
+                  <stringProp name="628581442">6217132123123${__Random(10000,99999,)}</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="66530">CCB</stringProp>
+                  <stringProp name="2033077207">TGRXZPXE8q6PNbRnRK5A3ZPZPVTm8GR8dR</stringProp>
+                  <stringProp name="-1919391602">http://txpressure-dispatch.qwasn.com/order/callback</stringProp>
+                  <stringProp name="-1919391602">http://txpressure-dispatch.qwasn.com/order/callback</stringProp>
+                  <stringProp name="-1815175906">AUTOMX${__Random(1000000,9999999)}</stringProp>
+                  <stringProp name="1477262268">200.00</stringProp>
+                </collectionProp>
+              </collectionProp>
+              <boolProp name="UserParameters.per_iteration">false</boolProp>
+            </UserParameters>
+            <hashTree/>
+            <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="pay_type" elementType="Argument">
+                  <stringProp name="Argument.name">pay_type</stringProp>
+                  <stringProp name="Argument.value">912</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <stringProp name="Argument.desc">提款方式（数据类型：int）,{1：银行卡转账，888：备付金转账 ，912：极速转卡} </stringProp>
+                </elementProp>
+                <elementProp name="merchant_id1" elementType="Argument">
+                  <stringProp name="Argument.name">merchant_id1</stringProp>
+                  <stringProp name="Argument.value">3000101</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="key1" elementType="Argument">
+                  <stringProp name="Argument.name">key1</stringProp>
+                  <stringProp name="Argument.value">8v8rlnb564jroob00k6a4fs4lw0uljg5</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="request_type" elementType="Argument">
+                  <stringProp name="Argument.name">request_type</stringProp>
+                  <stringProp name="Argument.value">1</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </Arguments>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTX_merchantaccountrecord_deposit_create">
+              <stringProp name="HTTPSampler.path">/deposit/create</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="merchant_id" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${dmerchant_id}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">merchant_id</stringProp>
+                  </elementProp>
+                  <elementProp name="merchant_order_id" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${merchant_order_id}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">merchant_order_id</stringProp>
+                  </elementProp>
+                  <elementProp name="pay_type" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${pay_type}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">pay_type</stringProp>
+                  </elementProp>
+                  <elementProp name="pay_amt" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${pay_amt}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">pay_amt</stringProp>
+                  </elementProp>
+                  <elementProp name="name" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${name}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">name</stringProp>
+                  </elementProp>
+                  <elementProp name="user_credit_level" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${user_credit_level}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">user_credit_level</stringProp>
+                  </elementProp>
+                  <elementProp name="user_level" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${user_level}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">user_level</stringProp>
+                  </elementProp>
+                  <elementProp name="client_type" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${client_type}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">client_type</stringProp>
+                  </elementProp>
+                  <elementProp name="notify_url" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${notify_url}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">notify_url</stringProp>
+                  </elementProp>
+                  <elementProp name="return_url" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${return_url}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">return_url</stringProp>
+                  </elementProp>
+                  <elementProp name="bank_code" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${bank_code}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">bank_code</stringProp>
+                  </elementProp>
+                  <elementProp name="user_id" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${user_id}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">user_id</stringProp>
+                  </elementProp>
+                  <elementProp name="user_ip" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${user_ip}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">user_ip</stringProp>
+                  </elementProp>
+                  <elementProp name="remark" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${Remark}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">remark</stringProp>
+                  </elementProp>
+                  <elementProp name="phone_number" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${phone_number}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">phone_number</stringProp>
+                  </elementProp>
+                  <elementProp name="source_type" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">0</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">source_type</stringProp>
+                  </elementProp>
+                  <elementProp name="member_account" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">member_account</stringProp>
+                  </elementProp>
+                  <elementProp name="protocol" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">0</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">protocol</stringProp>
+                  </elementProp>
+                  <elementProp name="currency" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">currency</stringProp>
+                  </elementProp>
+                  <elementProp name="sign" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${sign}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">sign</stringProp>
+                  </elementProp>
+                  <elementProp name="amount_type" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">amount_type</stringProp>
+                  </elementProp>
+                  <elementProp name="rate" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">rate</stringProp>
+                  </elementProp>
+                  <elementProp name="act_pay_amt" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">act_pay_amt</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="formheader" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">false</stringProp>
+                <stringProp name="script">import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.concurrent.ThreadLocalRandom
+import org.apache.commons.codec.digest.DigestUtils
+
+// 时间：yyMMddHHmmss
+def time = new SimpleDateFormat(&quot;yyMMddHHmmss&quot;).format(new Date())
+
+// 随机数
+def rand1 = ThreadLocalRandom.current().nextInt(0, 100000) // 0~99999
+def rand2 = ThreadLocalRandom.current().nextInt(0, 1000)   // 0~999
+
+def Remark=&quot;${remark}&quot;
+vars.put(&quot;Remark&quot;,Remark)
+
+// 订单号
+def merchant_order_id = &quot;TDEST${time}${rand1}${rand2}&quot;
+
+vars.put(&quot;merchant_order_id&quot;, merchant_order_id)
+
+//${__MD5(merchant_id=${dmerchant_id}&amp;merchant_order_id=${merchant_order_id}&amp;pay_type=${pay_type}&amp;pay_amt=${pay_amt}&amp;notify_url=${notify_url}&amp;return_url=${return_url}&amp;bank_code=${bank_code}&amp;remark=${remark}&amp;key=${dkey},)}
+
+
+
+def str=&quot;merchant_id=${dmerchant_id}&amp;merchant_order_id=&quot;+merchant_order_id+&quot;&amp;pay_type=${pay_type}&amp;pay_amt=${pay_amt}&amp;notify_url=${notify_url}&amp;return_url=${return_url}&amp;bank_code=${bank_code}&amp;remark=&quot;+Remark+&quot;&amp;key=${dkey}&quot;
+log.info(&quot;加密前：&quot;+str);
+def depositorder_sign=DigestUtils.md5Hex(str)
+//log.info(&quot;加密后：&quot;+depositorder_sign);
+
+vars.put(&quot;sign&quot;,depositorder_sign)
+
+
+
+
+</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="merchant_order_id1" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">merchant_order_id1</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.merchant_order_id</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">LLLLLLLLLLLL</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="pay_amt1" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">pay_amt1</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.pay_amt</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">LLLLLLLLLLLL</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="match_merchant_order_id1" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">match_merchant_order_id1</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.match_merchant_order_id</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">LLLLL</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="match_platform_order_id1" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">match_platform_order_id1</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.match_platform_order_id</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">LLLLL</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="pay_message" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">pay_message</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.pay_message</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">LLLLLLL</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="调试后置处理程序" enabled="true">
+                <boolProp name="displayJMeterProperties">false</boolProp>
+                <boolProp name="displayJMeterVariables">true</boolProp>
+                <boolProp name="displaySamplerProperties">true</boolProp>
+                <boolProp name="displaySystemProperties">false</boolProp>
+              </DebugPostProcessor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="响应断言" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1629487605">&quot;pay_message&quot;:1</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message"></stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">16</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="100金额-20%">
+            <intProp name="ThroughputController.style">1</intProp>
+            <boolProp name="ThroughputController.perThread">false</boolProp>
+            <intProp name="ThroughputController.maxThroughput">1</intProp>
+            <FloatProperty>
+              <name>ThroughputController.percentThroughput</name>
+              <value>20.0</value>
+              <savedValue>0.0</savedValue>
+            </FloatProperty>
+          </ThroughputController>
+          <hashTree>
+            <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters">
+              <collectionProp name="UserParameters.names">
+                <stringProp name="-1787697648">bank_code</stringProp>
+                <stringProp name="-1858772221">bank_num</stringProp>
+                <stringProp name="427278064">bank_owner</stringProp>
+                <stringProp name="-1795601167">bank_address</stringProp>
+                <stringProp name="-934624384">remark</stringProp>
+                <stringProp name="-1941370190">user_credit_level</stringProp>
+                <stringProp name="1927915024">user_level</stringProp>
+                <stringProp name="-147132901">user_ip</stringProp>
+                <stringProp name="-612351174">phone_number</stringProp>
+                <stringProp name="-1806538376">query_url</stringProp>
+                <stringProp name="-81103626">channel_type</stringProp>
+                <stringProp name="-1948726807">split_order</stringProp>
+                <stringProp name="377959296">user_address</stringProp>
+                <stringProp name="100490164">is_dc</stringProp>
+                <stringProp name="-1210880319">amount_type</stringProp>
+                <stringProp name="575402001">currency</stringProp>
+                <stringProp name="-989163880">protocol</stringProp>
+                <stringProp name="-173671634">client_type</stringProp>
+                <stringProp name="-84625186">source_type</stringProp>
+                <stringProp name="3373707">name</stringProp>
+                <stringProp name="558450346">risk_type</stringProp>
+                <stringProp name="1167805093">app_site</stringProp>
+                <stringProp name="295717893">bank_mobile</stringProp>
+                <stringProp name="-1193614750">id_num</stringProp>
+                <stringProp name="-529861103">user_credit_level_deposit</stringProp>
+                <stringProp name="1034523503">bank_code_deposit</stringProp>
+                <stringProp name="-1505781661">USDT_address</stringProp>
+                <stringProp name="-1164591239">notify_url</stringProp>
+                <stringProp name="1337530848">return_url</stringProp>
+                <stringProp name="-147132913">user_id</stringProp>
+                <stringProp name="-787102287">pay_amt</stringProp>
+              </collectionProp>
+              <collectionProp name="UserParameters.thread_values">
+                <collectionProp name="1777230013">
+                  <stringProp name="66530">CCB</stringProp>
+                  <stringProp name="-1310140749">6217132123123${__Random(1000,9999,)}</stringProp>
+                  <stringProp name="442363260">${__RandomString(1,赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳丰鲍史唐费廉岑薛雷贺倪汤滕殷罗毕郝邬安常乐于时傅皮卞齐康伍余元卜顾孟平黄和萧尹湛汪祁毛禹狄米贝成戴谈宋茅庞熊纪舒屈项祝董梁杜阮蓝闵席季麻强贾路娄危江童颜郭梅盛林刁钟徐邱骆高夏蔡樊胡凌霍虞万支柯昝管卢莫白房裘缪干解应宗丁宣贲邓郁单杭洪包诸左石崔吉钮龚程嵇邢滑裴陆荣翁荀羊惠甄曲家封芮羿储靳汲邴糜松井段富巫乌焦巴弓牧隗山谷车侯宓蓬全郗班仰秋仲伊宫宁仇栾暴甘钭祖武符刘景詹束龙叶幸司韶郜黎蓟印宿台怀蒲从鄂索咸籍赖卓蔺屠蒙池乔胥能苍双闻莘党翟谭贡劳逄姬申扶堵冉宰郦雍璩桑桂濮牛寿通边扈燕冀浦尚农温别庄晏柴瞿阎充慕连茹习宦艾鱼容向古易慎戈廖终暨居衡步都耿满弘匡国文寇广禄阙东欧殳沃利蔚越隆师巩厍聂勾敖融冷訾辛阚那简饶空曾毋沙乜养鞠须丰巢关相查蒯红游竺权益桓公万俟司马上官夏侯诸葛闻人东方赫连皇甫尉迟公羊澹台公冶宗政濮阳淳于单于太叔申屠公孙轩辕令狐宇文长孙慕容司徒司空穆姚邵明臧计伏丘经於厉戎薄阴逢郏逯盖欧阳乐正钟离闾丘鲜于亓官司寇仉督子车颛孙端木巫马公西漆雕仲孙壤驷公良拓跋夹谷宰父谷粱晋楚阎法汝鄢涂钦段干百里东郭南门呼延归海羊舌微生岳帅缑亢况后有琴梁丘左丘东门西门商牟佘佴伯赏南宫墨哈谯笪年爱阳佟第五言福庚,)}${__RandomString(2,豫章故郡洪都新府星分翼轸地接衡庐襟三江而带五湖控蛮荆而引瓯越物华天宝龙光射牛斗之墟人杰地灵徐孺下陈蕃之榻雄州雾列俊采星驰台隍枕夷夏之交宾主尽东南之美都督阎公之雅望棨戟遥临宇文新州之懿范襜帷暂驻十旬休假胜友如云千里逢迎高朋满座腾蛟起凤孟学士之词宗紫电青霜王将军之武库家君作宰路出名区童子何知躬逢胜饯时维九月序属三秋潦水尽而寒潭清烟光凝而暮山紫俨骖騑于上路访风景于崇阿临帝子之长洲得天人之旧馆层峦耸翠上出重霄飞阁流丹下临无地鹤汀凫渚穷岛屿之萦回桂殿兰宫落霞与孤鹜齐飞秋水共长天一色披绣闼俯雕甍山原旷其盈视川泽纡其骇瞩闾阎扑地钟鸣鼎食之家舸舰弥津青雀黄龙之舳云销雨霁彩彻区明落霞与孤鹜齐飞秋水共长天一色渔舟唱晚响穷彭蠡之滨雁阵惊寒声断衡阳之浦遥襟甫畅逸兴遄飞爽籁发而清风生纤歌凝而白云遏睢园绿竹气凌彭泽之樽邺水朱华光照临川之笔四美具二难并穷睇眄于中天极娱游于暇日天高地迥觉宇宙之无穷兴尽悲来识盈虚之有数望长安于日下目吴会于云间地势极而南溟深天柱高而北辰远关山难越谁悲失路之人萍水相逢尽是他乡之客怀帝阍而不见奉宣室以何年嗟乎时运不齐命途多舛冯唐易老李广难封屈贾谊于长沙非无圣主窜梁鸿于海曲岂乏明时所赖君子见机达人知命老当益壮宁移白首之心穷且益坚不坠青云之志酌贪泉而觉爽处涸辙以犹欢北海虽赊扶摇可接东隅已逝桑榆非晚孟尝高洁空余报国之情阮籍猖狂岂效穷途之哭勃三尺微命一介书生无路请缨等终军之弱冠有怀投笔慕宗悫之长风舍簪笏于百龄奉晨昏于万里非谢家之宝树接孟氏之芳邻他日趋庭叨陪鲤对今兹捧袂喜托龙门杨意不逢抚凌云而自惜钟期既遇奏流水以何惭呜乎胜地不常盛筵难再兰亭已矣梓泽丘墟临别赠言幸承恩于伟饯登高作赋是所望于群公敢竭鄙怀恭疏短引一言均赋四韵俱成请洒潘江各倾陆海云尔,)}</stringProp>
+                  <stringProp name="753984894">${__RandomString(6,豫章故郡洪都新府星分翼轸地接衡庐襟三江而带五湖控蛮荆而引瓯越物华天宝龙光射牛斗之墟人杰地灵徐孺下陈蕃之榻雄州雾列俊采星驰台隍枕夷夏之交宾主尽东南之美都督阎公之雅望棨戟遥临宇文新州之懿范襜帷暂驻十旬休假胜友如云千里逢迎高朋满座腾蛟起凤孟学士之词宗紫电青霜王将军之武库家君作宰路出名区童子何知躬逢胜饯时维九月序属三秋潦水尽而寒潭清烟光凝而暮山紫俨骖騑于上路访风景于崇阿临帝子之长洲得天人之旧馆层峦耸翠上出重霄飞阁流丹下临无地鹤汀凫渚穷岛屿之萦回桂殿兰宫落霞与孤鹜齐飞秋水共长天一色披绣闼俯雕甍山原旷其盈视川泽纡其骇瞩闾阎扑地钟鸣鼎食之家舸舰弥津青雀黄龙之舳云销雨霁彩彻区明落霞与孤鹜齐飞秋水共长天一色渔舟唱晚响穷彭蠡之滨雁阵惊寒声断衡阳之浦遥襟甫畅逸兴遄飞爽籁发而清风生纤歌凝而白云遏睢园绿竹气凌彭泽之樽邺水朱华光照临川之笔四美具二难并穷睇眄于中天极娱游于暇日天高地迥觉宇宙之无穷兴尽悲来识盈虚之有数望长安于日下目吴会于云间地势极而南溟深天柱高而北辰远关山难越谁悲失路之人萍水相逢尽是他乡之客怀帝阍而不见奉宣室以何年嗟乎时运不齐命途多舛冯唐易老李广难封屈贾谊于长沙非无圣主窜梁鸿于海曲岂乏明时所赖君子见机达人知命老当益壮宁移白首之心穷且益坚不坠青云之志酌贪泉而觉爽处涸辙以犹欢北海虽赊扶摇可接东隅已逝桑榆非晚孟尝高洁空余报国之情阮籍猖狂岂效穷途之哭勃三尺微命一介书生无路请缨等终军之弱冠有怀投笔慕宗悫之长风舍簪笏于百龄奉晨昏于万里非谢家之宝树接孟氏之芳邻他日趋庭叨陪鲤对今兹捧袂喜托龙门杨意不逢抚凌云而自惜钟期既遇奏流水以何惭呜乎胜地不常盛筵难再兰亭已矣梓泽丘墟临别赠言幸承恩于伟饯登高作赋是所望于群公敢竭鄙怀恭疏短引一言均赋四韵俱成请洒潘江各倾陆海云尔,)}</stringProp>
+                  <stringProp name="1607536909">AUTOMX${__RandomString(4,zxcvbnmasdfghjklqwertyuiop0123456789,)}</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="-1258129322">175.100.203.34</stringProp>
+                  <stringProp name="0"></stringProp>
+                  <stringProp name="-1632055913">http://site5026.web-classyblue-3.bwfat2022.com</stringProp>
+                  <stringProp name="49">1</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="753984894">${__RandomString(6,豫章故郡洪都新府星分翼轸地接衡庐襟三江而带五湖控蛮荆而引瓯越物华天宝龙光射牛斗之墟人杰地灵徐孺下陈蕃之榻雄州雾列俊采星驰台隍枕夷夏之交宾主尽东南之美都督阎公之雅望棨戟遥临宇文新州之懿范襜帷暂驻十旬休假胜友如云千里逢迎高朋满座腾蛟起凤孟学士之词宗紫电青霜王将军之武库家君作宰路出名区童子何知躬逢胜饯时维九月序属三秋潦水尽而寒潭清烟光凝而暮山紫俨骖騑于上路访风景于崇阿临帝子之长洲得天人之旧馆层峦耸翠上出重霄飞阁流丹下临无地鹤汀凫渚穷岛屿之萦回桂殿兰宫落霞与孤鹜齐飞秋水共长天一色披绣闼俯雕甍山原旷其盈视川泽纡其骇瞩闾阎扑地钟鸣鼎食之家舸舰弥津青雀黄龙之舳云销雨霁彩彻区明落霞与孤鹜齐飞秋水共长天一色渔舟唱晚响穷彭蠡之滨雁阵惊寒声断衡阳之浦遥襟甫畅逸兴遄飞爽籁发而清风生纤歌凝而白云遏睢园绿竹气凌彭泽之樽邺水朱华光照临川之笔四美具二难并穷睇眄于中天极娱游于暇日天高地迥觉宇宙之无穷兴尽悲来识盈虚之有数望长安于日下目吴会于云间地势极而南溟深天柱高而北辰远关山难越谁悲失路之人萍水相逢尽是他乡之客怀帝阍而不见奉宣室以何年嗟乎时运不齐命途多舛冯唐易老李广难封屈贾谊于长沙非无圣主窜梁鸿于海曲岂乏明时所赖君子见机达人知命老当益壮宁移白首之心穷且益坚不坠青云之志酌贪泉而觉爽处涸辙以犹欢北海虽赊扶摇可接东隅已逝桑榆非晚孟尝高洁空余报国之情阮籍猖狂岂效穷途之哭勃三尺微命一介书生无路请缨等终军之弱冠有怀投笔慕宗悫之长风舍簪笏于百龄奉晨昏于万里非谢家之宝树接孟氏之芳邻他日趋庭叨陪鲤对今兹捧袂喜托龙门杨意不逢抚凌云而自惜钟期既遇奏流水以何惭呜乎胜地不常盛筵难再兰亭已矣梓泽丘墟临别赠言幸承恩于伟饯登高作赋是所望于群公敢竭鄙怀恭疏短引一言均赋四韵俱成请洒潘江各倾陆海云尔,)}</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="66894">CNY</stringProp>
+                  <stringProp name="66530">CCB</stringProp>
+                  <stringProp name="0"></stringProp>
+                  <stringProp name="49">1</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="442363260">${__RandomString(1,赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳丰鲍史唐费廉岑薛雷贺倪汤滕殷罗毕郝邬安常乐于时傅皮卞齐康伍余元卜顾孟平黄和萧尹湛汪祁毛禹狄米贝成戴谈宋茅庞熊纪舒屈项祝董梁杜阮蓝闵席季麻强贾路娄危江童颜郭梅盛林刁钟徐邱骆高夏蔡樊胡凌霍虞万支柯昝管卢莫白房裘缪干解应宗丁宣贲邓郁单杭洪包诸左石崔吉钮龚程嵇邢滑裴陆荣翁荀羊惠甄曲家封芮羿储靳汲邴糜松井段富巫乌焦巴弓牧隗山谷车侯宓蓬全郗班仰秋仲伊宫宁仇栾暴甘钭祖武符刘景詹束龙叶幸司韶郜黎蓟印宿台怀蒲从鄂索咸籍赖卓蔺屠蒙池乔胥能苍双闻莘党翟谭贡劳逄姬申扶堵冉宰郦雍璩桑桂濮牛寿通边扈燕冀浦尚农温别庄晏柴瞿阎充慕连茹习宦艾鱼容向古易慎戈廖终暨居衡步都耿满弘匡国文寇广禄阙东欧殳沃利蔚越隆师巩厍聂勾敖融冷訾辛阚那简饶空曾毋沙乜养鞠须丰巢关相查蒯红游竺权益桓公万俟司马上官夏侯诸葛闻人东方赫连皇甫尉迟公羊澹台公冶宗政濮阳淳于单于太叔申屠公孙轩辕令狐宇文长孙慕容司徒司空穆姚邵明臧计伏丘经於厉戎薄阴逢郏逯盖欧阳乐正钟离闾丘鲜于亓官司寇仉督子车颛孙端木巫马公西漆雕仲孙壤驷公良拓跋夹谷宰父谷粱晋楚阎法汝鄢涂钦段干百里东郭南门呼延归海羊舌微生岳帅缑亢况后有琴梁丘左丘东门西门商牟佘佴伯赏南宫墨哈谯笪年爱阳佟第五言福庚,)}${__RandomString(2,豫章故郡洪都新府星分翼轸地接衡庐襟三江而带五湖控蛮荆而引瓯越物华天宝龙光射牛斗之墟人杰地灵徐孺下陈蕃之榻雄州雾列俊采星驰台隍枕夷夏之交宾主尽东南之美都督阎公之雅望棨戟遥临宇文新州之懿范襜帷暂驻十旬休假胜友如云千里逢迎高朋满座腾蛟起凤孟学士之词宗紫电青霜王将军之武库家君作宰路出名区童子何知躬逢胜饯时维九月序属三秋潦水尽而寒潭清烟光凝而暮山紫俨骖騑于上路访风景于崇阿临帝子之长洲得天人之旧馆层峦耸翠上出重霄飞阁流丹下临无地鹤汀凫渚穷岛屿之萦回桂殿兰宫落霞与孤鹜齐飞秋水共长天一色披绣闼俯雕甍山原旷其盈视川泽纡其骇瞩闾阎扑地钟鸣鼎食之家舸舰弥津青雀黄龙之舳云销雨霁彩彻区明落霞与孤鹜齐飞秋水共长天一色渔舟唱晚响穷彭蠡之滨雁阵惊寒声断衡阳之浦遥襟甫畅逸兴遄飞爽籁发而清风生纤歌凝而白云遏睢园绿竹气凌彭泽之樽邺水朱华光照临川之笔四美具二难并穷睇眄于中天极娱游于暇日天高地迥觉宇宙之无穷兴尽悲来识盈虚之有数望长安于日下目吴会于云间地势极而南溟深天柱高而北辰远关山难越谁悲失路之人萍水相逢尽是他乡之客怀帝阍而不见奉宣室以何年嗟乎时运不齐命途多舛冯唐易老李广难封屈贾谊于长沙非无圣主窜梁鸿于海曲岂乏明时所赖君子见机达人知命老当益壮宁移白首之心穷且益坚不坠青云之志酌贪泉而觉爽处涸辙以犹欢北海虽赊扶摇可接东隅已逝桑榆非晚孟尝高洁空余报国之情阮籍猖狂岂效穷途之哭勃三尺微命一介书生无路请缨等终军之弱冠有怀投笔慕宗悫之长风舍簪笏于百龄奉晨昏于万里非谢家之宝树接孟氏之芳邻他日趋庭叨陪鲤对今兹捧袂喜托龙门杨意不逢抚凌云而自惜钟期既遇奏流水以何惭呜乎胜地不常盛筵难再兰亭已矣梓泽丘墟临别赠言幸承恩于伟饯登高作赋是所望于群公敢竭鄙怀恭疏短引一言均赋四韵俱成请洒潘江各倾陆海云尔,)}</stringProp>
+                  <stringProp name="0"></stringProp>
+                  <stringProp name="51">3</stringProp>
+                  <stringProp name="-37662831">155${__Random(00000000,99999999,)}</stringProp>
+                  <stringProp name="628581442">6217132123123${__Random(10000,99999,)}</stringProp>
+                  <stringProp name="48">0</stringProp>
+                  <stringProp name="66530">CCB</stringProp>
+                  <stringProp name="2033077207">TGRXZPXE8q6PNbRnRK5A3ZPZPVTm8GR8dR</stringProp>
+                  <stringProp name="-1919391602">http://txpressure-dispatch.qwasn.com/order/callback</stringProp>
+                  <stringProp name="-1919391602">http://txpressure-dispatch.qwasn.com/order/callback</stringProp>
+                  <stringProp name="-1815175906">AUTOMX${__Random(1000000,9999999)}</stringProp>
+                  <stringProp name="1448633117">100.00</stringProp>
+                </collectionProp>
+              </collectionProp>
+              <boolProp name="UserParameters.per_iteration">false</boolProp>
+            </UserParameters>
+            <hashTree/>
+            <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="用户定义的变量">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="pay_type" elementType="Argument">
+                  <stringProp name="Argument.name">pay_type</stringProp>
+                  <stringProp name="Argument.value">912</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <stringProp name="Argument.desc">提款方式（数据类型：int）,{1：银行卡转账，888：备付金转账 ，912：极速转卡} </stringProp>
+                </elementProp>
+                <elementProp name="merchant_id1" elementType="Argument">
+                  <stringProp name="Argument.name">merchant_id1</stringProp>
+                  <stringProp name="Argument.value">3000101</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="key1" elementType="Argument">
+                  <stringProp name="Argument.name">key1</stringProp>
+                  <stringProp name="Argument.value">8v8rlnb564jroob00k6a4fs4lw0uljg5</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="request_type" elementType="Argument">
+                  <stringProp name="Argument.name">request_type</stringProp>
+                  <stringProp name="Argument.value">1</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </Arguments>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTX_merchantaccountrecord_deposit_create">
+              <stringProp name="HTTPSampler.path">/deposit/create</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="merchant_id" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${dmerchant_id}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">merchant_id</stringProp>
+                  </elementProp>
+                  <elementProp name="merchant_order_id" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${merchant_order_id}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">merchant_order_id</stringProp>
+                  </elementProp>
+                  <elementProp name="pay_type" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${pay_type}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">pay_type</stringProp>
+                  </elementProp>
+                  <elementProp name="pay_amt" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${pay_amt}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">pay_amt</stringProp>
+                  </elementProp>
+                  <elementProp name="name" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${name}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">name</stringProp>
+                  </elementProp>
+                  <elementProp name="user_credit_level" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${user_credit_level}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">user_credit_level</stringProp>
+                  </elementProp>
+                  <elementProp name="user_level" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${user_level}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">user_level</stringProp>
+                  </elementProp>
+                  <elementProp name="client_type" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${client_type}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">client_type</stringProp>
+                  </elementProp>
+                  <elementProp name="notify_url" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${notify_url}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">notify_url</stringProp>
+                  </elementProp>
+                  <elementProp name="return_url" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${return_url}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">return_url</stringProp>
+                  </elementProp>
+                  <elementProp name="bank_code" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${bank_code}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">bank_code</stringProp>
+                  </elementProp>
+                  <elementProp name="user_id" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${user_id}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">user_id</stringProp>
+                  </elementProp>
+                  <elementProp name="user_ip" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${user_ip}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">user_ip</stringProp>
+                  </elementProp>
+                  <elementProp name="remark" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${Remark}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">remark</stringProp>
+                  </elementProp>
+                  <elementProp name="phone_number" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${phone_number}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">phone_number</stringProp>
+                  </elementProp>
+                  <elementProp name="source_type" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">0</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">source_type</stringProp>
+                  </elementProp>
+                  <elementProp name="member_account" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">member_account</stringProp>
+                  </elementProp>
+                  <elementProp name="protocol" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">0</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">protocol</stringProp>
+                  </elementProp>
+                  <elementProp name="currency" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">currency</stringProp>
+                  </elementProp>
+                  <elementProp name="sign" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${sign}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">sign</stringProp>
+                  </elementProp>
+                  <elementProp name="amount_type" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">amount_type</stringProp>
+                  </elementProp>
+                  <elementProp name="rate" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">rate</stringProp>
+                  </elementProp>
+                  <elementProp name="act_pay_amt" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                    <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    <stringProp name="Argument.name">act_pay_amt</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="formheader">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate, br</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">false</stringProp>
+                <stringProp name="script">import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.concurrent.ThreadLocalRandom
+import org.apache.commons.codec.digest.DigestUtils
+
+// 时间：yyMMddHHmmss
+def time = new SimpleDateFormat(&quot;yyMMddHHmmss&quot;).format(new Date())
+
+// 随机数
+def rand1 = ThreadLocalRandom.current().nextInt(0, 100000) // 0~99999
+def rand2 = ThreadLocalRandom.current().nextInt(0, 1000)   // 0~999
+
+def Remark=&quot;${remark}&quot;
+vars.put(&quot;Remark&quot;,Remark)
+
+// 订单号
+def merchant_order_id = &quot;TDEST${time}${rand1}${rand2}&quot;
+
+vars.put(&quot;merchant_order_id&quot;, merchant_order_id)
+
+//${__MD5(merchant_id=${dmerchant_id}&amp;merchant_order_id=${merchant_order_id}&amp;pay_type=${pay_type}&amp;pay_amt=${pay_amt}&amp;notify_url=${notify_url}&amp;return_url=${return_url}&amp;bank_code=${bank_code}&amp;remark=${remark}&amp;key=${dkey},)}
+
+
+
+def str=&quot;merchant_id=${dmerchant_id}&amp;merchant_order_id=&quot;+merchant_order_id+&quot;&amp;pay_type=${pay_type}&amp;pay_amt=${pay_amt}&amp;notify_url=${notify_url}&amp;return_url=${return_url}&amp;bank_code=${bank_code}&amp;remark=&quot;+Remark+&quot;&amp;key=${dkey}&quot;
+log.info(&quot;加密前：&quot;+str);
+def depositorder_sign=DigestUtils.md5Hex(str)
+//log.info(&quot;加密后：&quot;+depositorder_sign);
+
+vars.put(&quot;sign&quot;,depositorder_sign)
+
+
+
+
+</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="merchant_order_id1">
+                <stringProp name="JSONPostProcessor.referenceNames">merchant_order_id1</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.merchant_order_id</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">LLLLLLLLLLLL</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="pay_amt1">
+                <stringProp name="JSONPostProcessor.referenceNames">pay_amt1</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.pay_amt</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">LLLLLLLLLLLL</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="match_merchant_order_id1" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">match_merchant_order_id1</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.match_merchant_order_id</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">LLLLL</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="match_platform_order_id1">
+                <stringProp name="JSONPostProcessor.referenceNames">match_platform_order_id1</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.match_platform_order_id</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">LLLLL</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="pay_message">
+                <stringProp name="JSONPostProcessor.referenceNames">pay_message</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.pay_message</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                <stringProp name="JSONPostProcessor.defaultValues">LLLLLLL</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+              <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="调试后置处理程序">
+                <boolProp name="displayJMeterProperties">false</boolProp>
+                <boolProp name="displayJMeterVariables">true</boolProp>
+                <boolProp name="displaySamplerProperties">true</boolProp>
+                <boolProp name="displaySystemProperties">false</boolProp>
+              </DebugPostProcessor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="响应断言">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-1629487605">&quot;pay_message&quot;:1</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message"></stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">16</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <BackendListener guiclass="BackendListenerGui" testclass="BackendListener" testname="压测机收集压测结果">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="influxdbMetricsSender" elementType="Argument">
+                <stringProp name="Argument.name">influxdbMetricsSender</stringProp>
+                <stringProp name="Argument.value">org.apache.jmeter.visualizers.backend.influxdb.HttpMetricsSender</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="influxdbUrl" elementType="Argument">
+                <stringProp name="Argument.name">influxdbUrl</stringProp>
+                <stringProp name="Argument.value">http://172.30.2.98:8086/write?db=jmeter</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="application" elementType="Argument">
+                <stringProp name="Argument.name">application</stringProp>
+                <stringProp name="Argument.value">HTX_JY</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="measurement" elementType="Argument">
+                <stringProp name="Argument.name">measurement</stringProp>
+                <stringProp name="Argument.value">jmeter</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="summaryOnly" elementType="Argument">
+                <stringProp name="Argument.name">summaryOnly</stringProp>
+                <stringProp name="Argument.value">false</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="samplersRegex" elementType="Argument">
+                <stringProp name="Argument.name">samplersRegex</stringProp>
+                <stringProp name="Argument.value">.*</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="percentiles" elementType="Argument">
+                <stringProp name="Argument.name">percentiles</stringProp>
+                <stringProp name="Argument.value">99;95;90</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="testTitle" elementType="Argument">
+                <stringProp name="Argument.name">testTitle</stringProp>
+                <stringProp name="Argument.value">merchantaccountrecord_list_DBL_title</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="eventTags" elementType="Argument">
+                <stringProp name="Argument.name">eventTags</stringProp>
+                <stringProp name="Argument.value">merchantaccountrecord_list_DBL_tag</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">org.apache.jmeter.visualizers.backend.influxdb.InfluxdbBackendListenerClient</stringProp>
+        </BackendListener>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
